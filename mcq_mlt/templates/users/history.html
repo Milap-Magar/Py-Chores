@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+
+{% endblock header %}
+
+{% block startscript %}
+{% endblock startscript %}
+
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">The platform which makes your <br> dream come true</span></h1>
+                <p class="subhead">MCQMLT is a platform where you can prepare for Nepal's demanded courses.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="history">
+    <div class="container mt-5">
+        <div class="row mt-5">
+            <div class="col-12 service-col">
+                <h3><span class="service-orange-span">My History</span></h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive-md">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datetime</th>
+                            <th scope="col">Modelset</th>
+                            <th scope="col">Correct</th>
+                            <th scope="col">Marks Obtained</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for my in results %}
+                        <tr>
+                            <th scope="row">{{ my.datetime }}</th>
+                            <td>{{ my.modelset}}</td>
+                            <td>{{ my.correct }}</td>
+                            <td>{{ my.markes_obtained }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock base-content %}
+
+{% block script %}
+
+<script>
+    document.getElementById('signup_tempt_fomr').style.display = 'none';
+    console.log('hello')  
+</script>
+
+{% endblock script %}

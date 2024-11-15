@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+
+{% endblock header %}
+
+{% block startscript %}
+{% endblock startscript %}
+
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">COURSE SYLLABUS</span></h1>
+                <p class="subhead">eduMLT is a platform where you can prepare for Nepal's demanded courses.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="syllabus-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 service-col left-col">
+                <h3><span class="syllabus-orange-span">Syllabus</span></h3>
+            </div>
+        </div>
+
+        {% if SyllabusCourse %}
+        <div class="row syllabus-cards-row row-cols-1 row-cols-md-3 g-4">
+            {% for course in SyllabusCourse %}
+            <div class="col">
+                <div class="card syllabus-card h-100">
+                    <img src="{{ course.image.url }}"
+                        class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-center">{{ course.name}}</h5>
+                        <p class="card-text text-center">{{ course.description|truncatechars:150|safe}}</p>
+                        <a href="{% url 'syllabus-detail' course.id %}" type="button" class="btn btn-outline-warning-my syllabus-details-btn">View Syllabus
+                            <i class='fas fa-angle-right'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+           
+        </div>
+
+        {% endif %}
+    </div>
+</section>
+
+
+{% endblock base-content %}
+
+

@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+<style>
+  .list-group-item p {
+    margin: 0;
+    border-radius: 6px solid white;
+  }
+</style>
+
+{% endblock header %}
+
+{% block startscript %}
+{% endblock startscript %}
+
+
+{% block base-content %}
+
+
+
+{% if not qotd %}
+<section id="hs_hero">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12 left-col">
+              <h1 class="text-white"><span class="text-lowercase">e-</span>MLT empowering you to follow <br /> your
+                dreams</span></h1>
+            <p class="subhead">expand your horizon with us
+            </p>
+              <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+          </div>
+
+      </div>
+</section>
+
+{% endif %}
+
+{% if qotd %}
+<section id="home_hs_hero">
+
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <h1><span class="white"> <span class="text-lowercase">e-</span>MLT empowering you to follow <br /> your
+            dreams</span></h1>
+        <p class="subhead">expand your horizon with us
+        </p>
+
+        <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+      </div>
+
+      {% if qotd and not correct %}
+
+      <div class="col-md-6 mobile-top">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="text-center"><span class="question text-center">Question</span> <br> of the Week</h2>
+
+            <form id="qotd-quizform" method='post' action=''>
+              {% csrf_token %}
+              <div class="form-group mb-4">
+                <li class="list-group-item" aria-current="true">{{ qotd.qotd_statement|safe }}</li>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="inlineCheckbox1" value="option1"
+                  name="{{ qotd.qotd_statement }}">
+                <label class="form-check-label" for="inlineCheckbox1">{{ qotd.op_1|safe }}</label>
+              </div>
+              <div class="form-check form-check">
+                <input class="form-check-input" type="radio" id="inlineCheckbox2" value="option2"
+                  name="{{ qotd.qotd_statement }}">
+                <label class="form-check-label" for="inlineCheckbox2">{{ qotd.op_2|safe }}</label>
+              </div>
+              <div class="form-check form-check">
+                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option3"
+                  name="{{ qotd.qotd_statement }}">
+                <label class="form-check-label" for="inlineCheckbox3">{{ qotd.op_3|safe }}</label>
+              </div>
+              <div class="form-check form-check">
+                <input class="form-check-input" type="radio" id="inlineCheckbox3" value="option4"
+                  name="{{ qotd.qotd_statement }}">
+                <label class="form-check-label" for="inlineCheckbox3">{{ qotd.op_4|safe }}</label>
+              </div>
+              <br>
+              <div class="text-center">
+                <button type="submit" class="quiz-contact-btn text-center">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      {% endif %}
+
+      {% if correct %}
+
+      <div class="col-md-6 mobile-top">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="text-center"><span class="question text-center">Question</span> <br> of the Week</h2>
+
+            <ul class="list-group list-group-flush">
+              {% if correct == 'Correct Answer' %}
+              <li class="list-group-item bg-success text-white">Congratulations!! You have given a {{ correct|safe }}.
+              </li>
+              {% endif %}
+              {% if correct == 'Wrong Answer' %}
+              <li class="list-group-item bg-danger text-white">Oops!! You have given a {{ correct|safe }}.</li>
+              {% endif %}
+              <li class="list-group-item">Question: {{ qotd|safe }}</li>
+              <li class="list-group-item">Explanation: {{ explanation|safe }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      {% endif %}
+
+    </div>
+  </div>
+
+</section>
+{% endif %}
+
+<section id="fourth-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 service-col">
+        <h3><span class="service-orange-span">Our Services</span></h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="service1">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="service-card card">
+          <img src="{% static 'img/1.jpg' %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Lab Assistant</h5>
+            <p class="card-text">We provide courses and MCQs for the Loksewa examination of 4th level lab assistant for
+              all seven provinces of Nepal along with their respective syllabus.</p>
+            <a href="{% url 'course' %}" class="btn btn-services">GET STARTED</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 pl-6 right-div">
+        <h4 class="right-service-head">LAB ASSISTANT</h4>
+        <p class="right-service-text">We provide courses and MCQs for the Loksewa examination of 4th level lab assistant
+          for all seven provinces of Nepal along with their respective syllabus.
+        </p>
+        <ul class="right-service-text">
+          <li> High success rate in previous PSC examination</li>
+          <li> Topic wise theory & MCQs preparation</li>
+          <li> Model MCQs from each topic</li>
+          <li>Unlimited free mock test</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="service2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 pl-6 right-div">
+        <h4 class="right-service-head">Lab Technician</h4>
+        <p class="right-service-text">We provide courses and MCQs for Loksewa examination of 5th level lab technician
+          for all seven provinces and central Government of Nepal along with respective syllabus. Also, we provide
+          courses for Nepal Health Professional Council (NHPC) license examination preparation of CMLT level.
+        </p>
+        <ul class="right-service-text">
+          <li> Daily Question answer discussion (QAD) session</li>
+          <li> High success rate in previous PSC and license examination
+          </li>
+          <li> Topic wise theory & MCQs preparation</li>
+          <li> Evaluation by daily mock test</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card card">
+          <img src="{% static 'img/3.jpg' %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Lab Technician</h5>
+            <p class="card-text">We provide courses and MCQs for Loksewa examination of 5th level lab technician
+              for all seven provinces and central Government of Nepal along with respective syllabus. Also, we provide
+              courses for Nepal Health Professional Council (NHPC) license examination preparation of CMLT level.</p>
+            <a href="{% url 'course' %}" class="btn btn-services">GET STARTED</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="service3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="service-card card">
+          <img src="{% static 'img/2.jpg' %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Lab Technologist</h5>
+            <p class="card-text">We focus on courses along with MCQs for BSc MLT common entrance examination and NHPC
+              license examination. We also provide courses and MCQs for the Loksewa examination of 7th level lab
+              technologist.</p>
+            <a href="{% url 'course' %}" class="btn btn-services">GET STARTED</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 pl-6 right-div">
+        <h4 class="right-service-head">Lab Technologist</h4>
+        <p class="right-service-text">We focus on courses along with MCQs for BSc MLT common entrance examination and
+          NHPC license examination. We also provide courses and MCQs for the Loksewa examination of 7th level lab
+          technologist.
+        </p>
+        <ul class="right-service-text">
+          <li> Daily self-evaluation by Mock test
+          </li>
+          <li> Topic wise theory & MCQs preparation</li>
+          <li> Dedicated only for Medical lab technology (MLT)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="service2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 pl-6 right-div">
+        <h4 class="right-service-head">Msc. Clinical/Medical Microbiology & Biochemistry</h4>
+        <p class="right-service-text">We provide syllabus, courses, and mock tests for the Medical examination
+          commission (MEC) for MSc clinical/ Medical Microbiology & Biochemistry.
+        </p>
+        <ul class="right-service-text">
+          <li> Self-evaluation by Mock test</li>
+          <li> Subject wise MCQs practice</li>
+          <li> Question prepared by esteemed laboratory professionals
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card card">
+          <img src="{% static 'img/4.jpg' %}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Msc. Clinical/Medical Microbiology & Biochemistry</h5>
+            <p class="card-text">We provide syllabus, courses, and mock tests for the Medical examination
+              commission (MEC) for MSc clinical/ Medical Microbiology & Biochemistry.</p>
+            <a href="{% url 'course' %}" class="btn btn-services">GET STARTED</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if students %}
+<section id="testimonial">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center font-weight-bold">
+        <h2 class="font-weight-bold mb-5">STUDENT'S SUCCESS STORIES</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="owl-carousel owl-theme">
+
+      {% for student in students %}
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="student-img">
+              <img src="{{ student.student_picture.url }}" class="card-img-top" alt="{{ student.student_name }}">
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <div class="student_content" style="word-break: break-all;">
+              <h5 class="card-title name">{{ student.student_name }}</h5>
+              <p class="card-title student-orange-title">{{ student.achievement_success }}</p>
+              <p class="student-right-service-text p-2" style="word-break: break-all;">{{
+                student.little_description|safe }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {% endfor %}
+    </div>
+  </div>
+
+
+
+
+
+
+
+</section>
+
+{% endif %}
+
+
+
+{% endblock base-content %}
+
+
+
+{% block script %}
+<script>
+
+  function closeFunction() {
+    console.log('kuegfywebcyweb')
+    var x = document.getElementById('bubhubhb')
+    console.log('x');
+    console.log(x);
+    x.style.display = 'none';
+  }
+
+</script>
+{% endblock script %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+<style>
+    .resutl {
+        margin-top: 154px;
+    }
+
+    @media (max-width: 767px) {
+        .resutl {
+            margin-top: -54px;
+        }
+    }
+</style>
+
+{% endblock header %}
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">MCQs - Results</span></h1>
+                <p class="subhead">MCQMLT helps you to show you the past results.</p>
+            </div>
+
+        </div>
+</section>
+
+<div class="container resutl">
+    <div class="row">
+        <div class="col">
+
+
+            <div class="card text-center">
+                <div>
+                    <h1>STAY TUNED!</h1>
+                </div>
+                <div class="card-header">
+                    Hello <b>{{ request.user }}</b>
+                </div>
+                {% if modelset %}
+                <h2>The group for <span class="text-primary">{{modelset}}</span> has not been created yet.</h2>
+                {% endif %}
+                <div class="card-footer text-muted">
+                    <a href="{% url 'course' %}" class="btn btn-success">Return to MCQ : Course Page</a>
+                </div>
+                <div>
+                    <p>If you think it's a mistake please contact us!</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock base-content %}

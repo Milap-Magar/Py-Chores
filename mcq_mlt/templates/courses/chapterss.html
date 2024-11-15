@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+{% endblock header %}
+
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">Chapters</span></h1>
+                <p class="subhead">Educate yourself with eduMLT.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="level-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 level-col text-left left-col">
+                <h3><span class="level-orange-span">Let's dive into the Chapters - <b> {{ unit.name }} </b></span></h3>
+            </div>
+        </div>
+
+        {% if chapterss %}
+        {% for chapterss in chapterss %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="my-chapter-list">
+                    <div class="unit-title">
+                        <a href="{%url 'chapterdetails' chapterss.id %}">
+                            <span class="student-orange-title">Chapter {{ forloop.counter }} </span> | {{ chapterss.name }}
+                        </a>
+                    </div>
+                    <div class="percentage-completed">
+                        <a href="{%url 'chapterdetails' chapterss.id %}" class="btn btn-success">
+                            Read <i class='fas fa-eye'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+
+    <div class="row row-cols-1 row-cols-md-3 cards-row g-4" style="padding:0 3% 0 3%;">
+        <div class="col left">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Oops !!</h5>
+                    <p class="card-text">No Chapters have been added in this Unit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+    </div>
+</section>
+
+
+
+{% endblock base-content %}

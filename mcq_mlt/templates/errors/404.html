@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock header %}
+
+{% block base-content %}
+
+<div class="container" style="height: 50vh;">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <!-- <img src="{% static 'img/monitor.png' %}" alt="aasas"> -->
+        <p>Could not find the page, you are looking for.</p>
+        <p>May be the link is broken or the page does not exit</p>
+        <a class="btn btn-primary float-center" href="/">Go to home</a>
+    </div>
+</div>
+{% endblock base-content %}

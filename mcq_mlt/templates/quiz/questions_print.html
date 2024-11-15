@@ -1,0 +1,45 @@
+<style>
+    span.my-inline p {
+        display: inline !important;
+    }
+    
+    li{
+        list-style: none;
+    }
+</style>
+
+<h2>{{ modelset.modelset_title }}</h2>
+
+{% for q in question %}
+<div class="form-group mb-4">
+    <span class="" aria-current="true" style="list-style:none !important;">{{ forloop.counter }}.<span class="my-inline">{{ q.question_statement|safe }}</span></span>
+</div>
+<div class="form-check">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios1" value="option1">  
+        <label class="form-check-label" for="gridRadios1">
+            <span class="my-inline">a. {{ q.choice_1|safe }}</span>
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios2" value="option2">
+        <label class="form-check-label" for="gridRadios2">
+            <span class="my-inline">b. {{ q.choice_2|safe }}</span>
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios3" value="option3">
+        <label class="form-check-label" for="gridRadios1">
+            <span class="my-inline">c. {{ q.choice_3|safe }}</span>
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios2" value="option4">
+        <label class="form-check-label" for="gridRadios4">
+            <span class="my-inline">d. {{ q.choice_4|safe }}</span>
+        </label>
+    </div>
+    <br>
+</div>
+<hr>
+{% endfor %}

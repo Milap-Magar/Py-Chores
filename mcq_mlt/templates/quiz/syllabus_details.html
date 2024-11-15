@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+
+{% endblock header %}
+
+{% block startscript %}
+{% endblock startscript %}
+
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">COURSE SYLLABUS</span></h1>
+                <p class="subhead">MCQMLT is a platform where you can prepare for Nepal's demanded courses.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="syllabus-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 service-col left-col">
+                <h3><span class="syllabus-orange-span">Course Syllabus</span></h3>
+            </div>
+        </div>
+
+
+        {% if syllabuses %}
+        <div class="row mt-5">
+           
+           {% for s in syllabuses %}
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ s.syllabus_title}}</h5>
+                        <p class="card-text">{{ s.syllabus_description|safe }}</p>
+                        <p class="card-text"><a href="{{ s.syllabus.url }}" target="_blank" type="button"
+                                class="btn btn-outline-warning-my syllabus-details-btn">View Syllabus PDF
+                                <i class='fas fa-eye'></i>
+                            </a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+
+        <div class="row mt-5">
+           
+             <div class="col-12">
+                 <div class="card mb-3">
+                     <div class="card-body">
+                         <h5 class="card-title">No any syllabus has been added for this level.</h5>
+                         <p class="card-text">Stay Tuned</p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+         {% endif %}
+
+
+
+    </div>
+</section>
+
+
+{% endblock base-content %}

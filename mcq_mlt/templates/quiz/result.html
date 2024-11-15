@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    span.my-inline p {
+        display: inline !important;
+    }
+
+    div.bg-success-my {
+        background: rgb(7, 146, 7);
+        color: #ffffff;
+        padding: 12px 24px;
+        border-radius: 5px;
+    }
+
+    div.correct-answers-text {
+        font-size: 125%;
+        color: #000000;
+        border-top: 2px solid rgb(97, 218, 16);
+        border-bottom: 2px solid rgb(97, 218, 16);
+        padding: 12px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    div.correct-answers-text p {
+        margin: 0 !important;
+    }
+
+
+    .bg-danger-my {
+        background: rgb(251, 0, 0);
+        padding: 12px 24px;
+        border-radius: 5px;
+        color: #ffffff;
+    }
+</style>
+
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock header %}
+
+
+
+{% block base-content %}
+<div class="container" style="margin-top: 80px;">
+    <div class="row">
+        <div class="col-12">
+            <p>
+                <center><b class="badge rounded-pill bg-success fs-4">View Your Result</b></center>
+            </p>
+
+            <p>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <b> Score: </b>
+                    <span class="badge bg-primary rounded-pill fs-4">{{ score }}</span>
+                </li>
+            </p>
+            <p>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <b> Correct: </b>
+                    <span class="badge bg-success rounded-pill fs-4">{{ correct }}</span>
+                </li>
+            </p>
+
+            <p>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <b> Wrong: </b>
+                    <span class="badge bg-danger rounded-pill fs-4">{{ wrong }}</span>
+                </li>
+            </p>
+
+            <p>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <b> Unanswered: </b>
+                    <span class="badge bg-secondary rounded-pill fs-4">{{ unanswered }}</span>
+                </li>
+            </p>
+
+            <p>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <b> Percent: </b>
+                    <span class="badge bg-primary rounded-pill fs-4">{{ percent }} %</span>
+                </li>
+            </p>
+
+            <p>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <b> Total: </b>
+                    <span class="badge bg-primary rounded-pill fs-4">{{ total }}</span>
+                </li>
+            </p>
+
+            <div class="progress mt-2 mb-4">
+                <p>Your Marks Bar: {{ percent }} %</p>
+                <div class="progress-bar" role="progressbar" style="width: {{ percent }}%" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <a href="{% url 'course' %}" class="btn btn-success">Return to MCQ : Course Page</a>
+        </div>
+    </div>
+</div>
+
+<!-- View the correct answers -->
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 correct-answers-text">
+            <p>View the correct answers</p>
+        </div>
+    </div>
+</div>
+
+<div class=container>
+    {% for k,v in xya_dict.items %}
+
+    <div class="form-group mb-4">
+        <li class="list-group-item" aria-current="true"> {{ forloop.counter }}. <span
+                class="my-inline badge bg-info text-dark">{{ v.q|safe }}</span>
+    </div>
+    <div class="form-check">
+
+        {% if v.answer == 'option1' %}
+        <div class="form-check bg-success-my">
+            <label class="form-check-label" for="gridRadios1">
+                1. <span class="my-inline">{{ v.choice_1|safe }}</span>
+            </label>
+        </div>
+
+        {% elif v.user_ans == 'option1' %}
+        <div class="form-check bg-danger-my">
+            <label class="form-check-label" for="gridRadios1">
+                1. <span class="my-inline">{{ v.choice_1|safe }}</span>
+            </label>
+        </div>
+
+        {% else %}
+        <div class="form-check">
+            <label class="form-check-label" for="gridRadios1">
+                1. <span class="my-inline">{{ v.choice_1|safe }}</span>
+            </label>
+        </div>
+        {% endif %}
+        <hr>
+
+        {% if v.answer == 'option2' %}
+        <div class="form-check bg-success-my">
+            <label class="form-check-label" for="gridRadios2">
+                2. <span class="my-inline">{{ v.choice_2|safe }}</span>
+            </label>
+        </div>
+        {% elif v.user_ans == 'option2' %}
+        <div class="form-check bg-danger-my">
+            <label class="form-check-label" for="gridRadios1">
+                1. <span class="my-inline">{{ v.choice_2|safe }}</span>
+            </label>
+        </div>
+        {% else %}
+        <div class="form-check">
+            <label class="form-check-label" for="gridRadios2">
+                2. <span class="my-inline">{{ v.choice_2|safe }}</span>
+            </label>
+        </div>
+        {% endif %}
+        <hr>
+
+        {% if v.answer == 'option3' %}
+        <div class="form-check bg-success-my">
+            <label class="form-check-label" for="gridRadios1">
+                3. <span class="my-inline">{{ v.choice_3|safe }}</span>
+            </label>
+        </div>
+        {% elif v.user_ans == 'option3' %}
+        <div class="form-check bg-danger-my">
+            <label class="form-check-label" for="gridRadios1">
+                1. <span class="my-inline">{{ v.choice_3|safe }}</span>
+            </label>
+        </div>
+        {% else %}
+        <div class="form-check">
+            <label class="form-check-label" for="gridRadios1">
+                3. <span class="my-inline">{{ v.choice_3|safe }}</span>
+            </label>
+        </div>
+        {% endif %}
+
+        <hr>
+
+        {% if v.answer == 'option4' %}
+        <div class="form-check bg-success-my">
+            <label class="form-check-label" for="gridRadios4">
+                4. <span class="my-inline">{{ v.choice_4|safe }}</span>
+            </label>
+        </div>
+        {% elif v.user_ans == 'option4' %}
+        <div class="form-check bg-danger-my">
+            <label class="form-check-label" for="gridRadios1">
+                1. <span class="my-inline">{{ v.choice_4|safe }}</span>
+            </label>
+        </div>
+        {% else %}
+        <div class="form-check">
+            <label class="form-check-label" for="gridRadios4">
+                4. <span class="my-inline">{{ v.choice_4|safe }}</span>
+            </label>
+        </div>
+        {% endif %}
+
+        <hr>
+        {% if v.explanation %}
+        <div class="form-check bg-green">
+            <label class="form-check-label" for="gridRadios4">
+                <span class="badge bg-success">Answer explanation: </span> <span class="">{{ v.explanation|safe }}</span>
+            </label>
+        </div>
+        {% endif %}
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+
+
+{% endblock base-content %}
+
+
+
+{% block script %}
+<script>
+    document.getElementById('signup_tempt_fomr').style.display = 'none';
+    console.log('hello')
+
+
+    window.onload = function () {
+        console.log('values of the forms');
+        console.log(document.getElementById('quizform').value);
+    }
+</script>
+{% endblock script %}

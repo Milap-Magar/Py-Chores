@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+<style>
+    .resutl {
+        margin-top: 154px;
+    }
+
+    @media (max-width: 767px) {
+        .resutl {
+            margin-top: -54px;
+        }
+    }
+
+
+
+    *{
+        margin:0;
+        padding:0;
+    }
+    span.my-inline p {
+        display: inline !important;
+    }
+
+    div.bg-success-my{
+        background: rgb(7, 146, 7);
+        color: #ffffff;
+        padding: 12px 24px;
+        border-radius: 5px;
+    }
+
+    div.correct-answers-text{
+        font-size: 125%;
+        color: #000000;
+        border-top: 2px solid rgb(97, 218, 16);
+        border-bottom: 2px solid rgb(97, 218, 16);
+        padding: 12px;
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+
+    div.correct-answers-text p{
+        margin: 0 !important;
+    }
+
+
+    .bg-danger-my{
+        background:rgb(251, 0, 0);
+        padding: 12px 24px;
+        border-radius: 5px;
+        color: #ffffff;
+    }
+
+
+</style>
+
+{% endblock header %}
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">MCQs - Results</span></h1>
+                <p class="subhead">MCQMLT helps you to show you the past results.</p>
+            </div>
+
+        </div>
+</section>
+
+<div class="container resutl">
+    <div class="row">
+        <div class="col">
+
+
+            <div class="card text-center">
+                <div class="card-header">
+                    Hello <b>{{ request.user }}</b>, You have already played this Quiz.
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Your result is displayed below:</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Marks Obtained: {{ marks_obtained }}</li>
+                        <li class="list-group-item">Correct: {{ correct }}</li>
+                        <li class="list-group-item">Wrong: {{ wrong }}</li>
+                        <li class="list-group-item">Unanswered: {{ unanswered }}</li>
+                        <li class="list-group-item">Attempted on: {{ datetime }}</li>
+                    </ul>
+
+                </div>
+                <div class="card-footer text-muted">
+                    <a href="{% url 'course' %}" class="btn btn-success">Return to MCQ : Course Page</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% if question %}
+
+            <div class="container">
+                <div class="row">
+                    <h2 class="mt-5 mb-5 list-group-item active"> The Modelset is displayed below:</h2>
+                    <div class="col-12">
+                        {% for q in question %}
+                        <div class="form-group mb-4">
+                            <li class="list-group-item active" aria-current="true"> {{ forloop.counter }}. <span
+                                    class="my-inline">{{ q.question_statement|safe }}</span>
+                        </div>
+                        <div class="form-check">
+                            {% if q.answer == 'option1' %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios1">
+                                    <span class="my-inline">{{ q.choice_1|safe }} <span class="text-success">(Correct answer)</span></span>
+                                </label>
+                            </div>
+                            {% else %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios1">
+                                    <span class="my-inline">{{ q.choice_1|safe }}</span>
+                                </label>
+                            </div>
+                            {% endif %}
+                            <hr>
+                            
+                            {% if q.answer == 'option2' %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios2">
+                                    <span class="my-inline">{{ q.choice_2|safe }} <span class="text-success">(Correct answer)</span></span>
+                                </label>
+                            </div>
+                            {% else %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios2">
+                                    <span class="my-inline">{{ q.choice_2|safe }}</span>
+                                </label>
+                            </div>
+                            {% endif %}
+                            <hr>
+
+                            {% if q.answer == 'option3' %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios1">
+                                    <span class="my-inline">{{ q.choice_3|safe }} <span class="text-success">(Correct answer)</span></span>
+                                </label>
+                            </div>
+                            {% else %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios1">
+                                    <span class="my-inline">{{ q.choice_3|safe }}</span>
+                                </label>
+                            </div>
+                            {% endif %}
+                            <hr>
+
+                            {% if q.answer == 'option4' %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios4">
+                                    <span class="my-inline">{{ q.choice_4|safe }} <span class="text-success">(Correct answer)</span></span>
+                                </label>
+                            </div>
+                            {% else %}
+                            <div class="form-check">
+                                <label class="form-check-label" for="gridRadios4">
+                                    <span class="my-inline">{{ q.choice_4|safe }}</span>
+                                </label>
+                            </div>
+                            {% endif %}
+                            <hr>
+                            <div class="form-check bg-green">
+                                <label class="form-check-label" for="gridRadios4">
+                                    <span class="badge bg-success">Answer explanation: </span> <span class="">{{ q.explanation|safe }}</span>
+                                </label>
+                            </div>
+                            <br>
+                        </div>
+
+                        {% endfor %}
+
+                        <br>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock base-content %}

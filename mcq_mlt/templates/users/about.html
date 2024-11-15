@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+
+{% endblock header %}
+
+{% block startscript %}
+{% endblock startscript %}
+
+
+{% block base-content %}
+
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">top <span class="text-lowercase">e-</span>learning platform of laboratory medicine </span></h1>
+                <p class="subhead">eduMLT is a platform where you can prepare for Nepal's demanded courses.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="about-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 about-col left-col">
+                <h3><span class="about-span">About e-MLT</span></h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 about-description">
+                <p>{{ about.about_mcqmlt|safe }}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Team -->
+
+<section id="our_team">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3><span class="our-team-text">Our Team</span></h3>
+            </div>
+        </div>
+        {% if teams %}
+        <div class="row our-team-cards row-cols-1 row-cols-md-3 g-4">
+            
+            {% for team in teams %}
+            <div class="col">
+                <div class="card">
+                    <img src="{{ team.picture.url }}"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title team-member-name text-center">{{ team.name }}</h5>
+                        <p class="card-text team-member-position text-center">{{ team.designation }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% else %}
+
+        <div class="row our-team-cards row-cols-1 row-cols-md-3 g-4">
+            
+            <div class="col">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title team-member-name text-center">Admin is yet to update this section</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+
+
+<!-- Our Advisors -->
+<section id="our_team">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3><span class="our-team-text">Advisor Team</span></h3>
+            </div>
+        </div>
+        {% if advisors %}
+        <div class="row">
+            {% for advisor in advisors %}
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title team-member-name text-center">{{ advisor.name }} 
+                            <span class="team-member-position">
+                                ( {{ advisor.designation }} )
+                            </span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+        <div class="row our-team-cards row-cols-1 row-cols-md-3 g-4">
+            
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title team-member-name text-center">Admin is yet to update this section</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+
+{% endblock base-content %}

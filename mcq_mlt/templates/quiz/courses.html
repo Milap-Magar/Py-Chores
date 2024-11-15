@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+
+{% endblock header %}
+
+{% block startscript %}
+{% endblock startscript %}
+
+
+{% block base-content %}
+
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">Educate yourself with <span class="text-lowercase">e-</span>MLT</span></h1>
+                <p class="subhead">eduMLT is a platform where you can prepare for Nepal's demanded courses.</p>
+                
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="fourth-row">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 service-col">
+                <h3><span class="service-orange-span">Courses </span></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center pt-4">
+                <h4>
+                    Coming Soon
+                </h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock base-content %}
+
+

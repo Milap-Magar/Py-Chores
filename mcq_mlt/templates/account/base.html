@@ -1,0 +1,46 @@
+<! -- extends mcqmlt base template -->
+  {% extends 'base.html' %}
+
+
+  {% block base-content %}
+
+  {% block body %}
+
+  <div class="parent container">
+
+    {% if messages %}
+    <div class="message">
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="">
+        {% if user.is_authenticated %}
+        <h3>You are already logged in</h3>
+        Go to home<span><a href="/">Home</a></span>
+        <!-- <li><a href="{% url 'account_email' %}">Change E-mail</a></li> -->
+        <a href="{% url 'account_logout' %}">Sign Out</a>
+        {% endif %}
+      </ul>
+    </div>
+
+  </div>
+
+
+  <div>
+    
+  </div>
+  {% block content %}
+  {% endblock %}
+  {% endblock %}
+  {% block extra_body %}
+
+  {% endblock %}
+
+
+  {% endblock base-content %}

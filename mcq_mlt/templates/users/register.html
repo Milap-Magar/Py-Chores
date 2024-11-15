@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block base-content %}
+
+
+<section id="login-form">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 login-page-image-div">
+        <div class="image-login">
+          <img class="login-left-logo" src="{% static 'img/login-logo.jpg' %}" alt="Login_Page_Logo">
+        </div>
+      </div>
+      <div class="col">
+        <div class="login-fomr">
+          <h2 class="text-center pt-4">Welcome to MCQMLT</h2>
+          <div class="google mt-5 mb-4">
+            <a class="siwg text-primary" href="{% provider_login_url "google" %}">Sign in with Google &nbsp; <i class='fab fa-google'></i></a>
+          </div>
+          <br>
+          <p class="text-center">
+
+            ---------- Or ----------
+          </p>
+          {{ form.non_field_errors }}
+
+          <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">Username
+              </label>
+              {{ form.username.errors }}
+              <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+              {{ form.username }}
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="exampleFormControlInput1" class="form-label font-weight-bold">First Name</label>
+                <!-- <input type="text" class="form-control" placeholder=""
+                                  aria-label="First name"> -->
+                {{ form.first_name.errors }}
+                {{ form.first_name }}
+
+              </div>
+              <div class="col">
+                <label for="exampleFormControlInput1" class="form-label font-weight-bold">Last Name</label>
+                <!-- <input type="text" class="form-control" placeholder=""
+                                  aria-label="Last name"> -->
+                {{ form.last_name.errors }}
+                {{ form.last_name}}
+
+              </div>
+            </div>
+
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">Email Address</label>
+              <!-- <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+              {{ form.email.errors }}
+              {{ form.email }}
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="exampleFormControlInput1" class="form-label font-weight-bold">Phone Number</label>
+                <!-- <input type="text" class="form-control" placeholder=""
+                                  aria-label="Phone Number"> -->
+                {{ form.phonenumber.errors }}
+                {{ form.phonenumber }}
+              </div>
+              <div class="col">
+                <label for="exampleFormControlInput1" class="form-label font-weight-bold">Gender</label>
+                <!-- <select class="form-select" aria-label="Default select example">
+                                  <option selected>--------</option>
+                                  <option value="1">Male</option>
+                                  <option value="2">Female</option>
+                                  <option value="3">Prefer not to say</option>
+                                </select> -->
+
+                {{ form.gender.errors }}
+                {{ form.gender }}
+              </div>
+            </div>
+
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">Password</label>
+              <!-- <input type="password" class="form-control" id="exampleFormControlInput2"
+                              placeholder=""> -->
+              {{ form.password1.errors }}
+              {{ form.password1 }}
+            </div>
+
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">Password</label>
+              <!-- <input type="password" class="form-control" id="exampleFormControlInput2"
+                            placeholder=""> -->
+              
+              {{ form.password2.errors }}
+              {{ form.password2 }}
+
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="exampleFormControlInput1" class="form-label font-weight-bold">Are you student of MCQMLT
+                  ?</label>
+                <!-- <select class="form-select" aria-label="Default select example">
+                  <option selected>--------</option>
+                  <option value="1">Yes</option>
+                  <option value="2">No</option>
+                </select> -->
+                {{ form.is_EDUMLT_student }}
+              </div>
+            </div>
+
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">(if yes) Enter the student code
+              </label>
+              <!-- <input type="text" class="form-control" id="exampleFormControlInput2" placeholder=""> -->
+              {{ form.student_code }}
+            </div>
+
+
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">Where did you hear about us
+                ?</label>
+              <!-- <input type="text" class="form-control" id="exampleFormControlInput2" placeholder=""> -->
+              {{ form.heard_from }}
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+              <label class="form-check-label" for="flexSwitchCheckDefault">Creating an account means you are okay with
+                our <span class="blue">Terms of Service, Privacy Policy.</span></label>
+            </div>
+
+            <div class="mb-3 mt-5">
+              <input class="login-btn-login-page" type="submit" value="REGISTER">
+            </div>
+            <div class="text-center mt-5 mb-4">
+              <a class="forgot-password" href="{% url 'login' %}">Already have an account ? Login </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}
+
+
+
+{% block script %}
+<script>
+  document.getElementById('signup_tempt_fomr').style.display = 'none';
+  console.log('hello')  
+
+
+
+  document.getElementById('id_username').classList.add("form-control"); 
+  document.getElementById('id_first_name').classList.add("form-control");  
+  document.getElementById('id_last_name').classList.add("form-control");  
+  document.getElementById('id_email').classList.add("form-control");  
+  document.getElementById('id_phonenumber').classList.add("form-control");  
+  document.getElementById('id_gender').classList.add("form-control");  
+  document.getElementById('id_password1').classList.add("form-control");  
+  document.getElementById('id_password2').classList.add("form-control");  
+  document.getElementById('id_is_EDUMLT_student').classList.add("form-check");  
+  document.getElementById('id_student_code').classList.add("form-control");  
+  document.getElementById('id_heard_from').classList.add("form-control");  
+  document.getElementById('flexSwitchCheckDefault').classList.add("form-control");  
+</script>
+{% endblock script %}

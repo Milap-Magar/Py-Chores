@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block base-content %}
+
+<section id="login-form">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 login-page-image-div">
+        <div class="image-login">
+          <img class="login-left-logo" src="{% static 'img/login-logo.jpg' %}" alt="Login_Page_Logo">
+        </div>
+      </div>
+      <div class="col">
+        <div class="login-fomr">
+          <h2 class="text-center pt-4">Welcome to MCQMLT</h2>
+          <div class="google mt-5 mb-4">
+            <a class="siwg text-primary" href="{% provider_login_url "google" %}">Sign in with Google &nbsp; <i class='fab fa-google'></i></a>
+          </div>
+          <br>
+          <p class="text-center">
+
+            ---------- Or ----------
+            {{ form.non_field_errors }}
+
+          </p>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">Username or Email</label>
+              <!-- <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+              {{ form.username }}
+            </div>
+            <div class="mb-3 mt-4">
+              <label for="exampleFormControlInput1" class="form-label font-weight-bold">Password</label>
+              <!-- <input type="password" class="form-control" id="exampleFormControlInput2" placeholder=""> -->
+              {{ form.password }}
+            </div>
+
+            <div class="mb-3 mt-5">
+              <input class="login-btn-login-page font-weight-bold" type="submit" value="Login">
+            </div>
+            <div class="text-center mt-5 mb-4">
+              <a class="forgot-password" href="{% url 'password_reset' %}">Forget Password ?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+  document.getElementById('id_username').classList.add("form-control"); 
+  document.getElementById('id_password').classList.add("form-control");  
+</script>
+{% endblock script %}

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+{% endblock header %}
+
+
+{% block base-content %}
+
+<!-- <section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">Chapters</span></h1>
+                <p class="subhead">Educate yourself with eduMLT.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section> -->
+
+<section id="level-section" style="margin-top: 75px;">
+    <div class="container">
+        {% if chapterss %}
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <div class="my-chapter-list">
+                    <div class="unit-title">
+                        <a href="">
+                            <span class="student-orange-title">Chapter : </span> {{ chapterss.name }}
+                        </a>
+                    </div>
+                   <div class="percentage-completed">
+                        <a class="btn study-mode-btn" onclick="openFullscreen();">Study Mode &nbsp; <i
+                                class='fas fa-expand-arrows-alt'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9" id="my_study">
+                <div class="content_of_the_course">
+                    <div class="percentage-completed mb-5">
+                        <a class="btn study-mode-btn" id="exitbtn" style="display: none;" onclick="exitFullscreen();">Normal Mode &nbsp; <i class='fas fa-compress-arrows-alt'></i>
+
+                        </a>
+                    </div>
+                    {{ chapterss.content | safe }}
+                </div>
+
+                <div class="content_of_the_course-btn mt-4">
+                    <div class="read-btnn">
+                        <a href="{% url 'readcompleted' chapterss.id %}" class="btn btn-primary mt-4 ml-4">Mark as Read</a>
+                    </div>
+
+                   <i> ** You can take test for this chapter once you completed reading it. </i>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="list-group my-main-list-group">
+                    <a href="#" class="list-group-item list-group-item-action my-active" aria-current="true">
+                        Chapters in {{ unit_name.name }}
+                    </a>
+                    {% for all_chapters in all_chapters %}
+                    <a href="{%url 'chapterdetails' all_chapters.id %}"
+                        class="list-group-item my-list-group list-group-item-action">{{ all_chapters.name }}
+
+                        {% if chapterss.id == all_chapters.id %}
+                        <i class='pl-2 fas fa-book-open book'></i>
+                        {% endif %}
+                    </a>
+                    {% endfor %}
+
+                    
+                    <a href="{% url 'unit' unit_name.id %}" class="btn get-started-btn mt-4">View all Units</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+
+    <div class="row row-cols-1 row-cols-md-3 cards-row g-4" style="padding:0 3% 0 3%;">
+        <div class="col left">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Oops !!</h5>
+                    <p class="card-text">No Content have been added in this CHapter</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+    </div>
+</section>
+
+
+
+{% endblock base-content %}
+
+
+{% block script %}
+<script>
+    var elem = document.getElementById("my_study");
+    function openFullscreen() {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+
+        document.getElementById('exitbtn').style.display = 'block';
+    }
+
+
+    function exitFullscreen() {
+        document.getElementById('exitbtn').style.display = 'none';
+        document.getElementById('exitbtn').innerText = 'General Mode On';
+        var elem = document.getElementById("my_study");
+
+        window.reload();
+
+        if (elem.exitFullscreen) {
+            document.getElementById('exitbtn').style.visibility = 'hidden';
+            document.getElementById('exitbtn').style.display = 'none';
+            elem.exitFullscreen();
+
+        } else if (elem.msExitFullscreen) {
+            document.getElementById('exitbtn').style.display = 'none';
+            elem.msExitFullscreen();
+        } else if (elem.mozCancelFullScreen) {
+            document.getElementById('exitbtn').style.display = 'none';
+            elem.mozCancelFullScreen();
+        } else if (elem.webkitExitFullscreen) {
+            document.getElementById('exitbtn').style.display = 'none';
+            elem.webkitExitFullscreen();
+        }
+
+        document.getElementById('exitbtn').style.visibility = 'hidden';
+
+    }
+
+</script>
+
+
+{% endblock script %}

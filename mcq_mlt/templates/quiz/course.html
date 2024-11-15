@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+{% endblock header %}
+
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">MCQs - LEVELS</span></h1>
+                <p class="subhead">Educate yourself with eduMLT.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="level-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 level-col text-left left-col">
+                <h3><span class="level-orange-span">Level </span></h3>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+
+        {% if courses %}
+        <div class="row row-cols-1 row-cols-md-3 cards-row g-4" style="padding:0 3% 0 3%;">
+            {% for courses in courses %}
+            <div class="col left">
+                <div class="card">
+                    <img src="{{ courses.level_image.url }}"
+                        class="card-img-top" alt="poster">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ courses.course_name }}</h5>
+                        <p class="card-text">{{ courses.course_description|truncatechars:150|safe }}</p>
+                        <a href="{% url 'category' courses.slug %}" class="btn get-started-btn">GET STARTED</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="row row-cols-1 row-cols-md-3 cards-row g-4" style="padding:0 3% 0 3%;">
+            <div class="col left">
+                <div class="card">
+                    <img src="https://www.galaxyeduworld.com/storage/blogs/5eafeeb02e2fb_750_351.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Oops !!</h5>
+                        <p class="card-text">No Levels added</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+
+    </div>
+</section>
+
+
+
+{% endblock base-content %}

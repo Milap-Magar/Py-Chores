@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+{% endblock header %}
+
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">Subjects</span></h1>
+                <p class="subhead">Educate yourself with eduMLT.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="level-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 level-col text-left left-col">
+                <h3><span class="level-orange-span">Explore the Subjects</span></h3>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+
+        {% if subb %}
+        <div class="row row-cols-1 row-cols-md-3 cards-row g-4" style="padding:0 3% 0 3%;">
+            {% for x,y in subb.items %}
+            <div class="col left">
+                <div class="card">
+                    <img src="{{ y.image.url }}"
+                        class="card-img-top" alt="poster">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ y.name }}</h5>
+                        <p class="card-text">{{ y.description|truncatechars:150|safe }}</p>
+                        <a href="{% url 'unit' y.id %}" class="btn get-started-btn">GET STARTED</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <section id="fourth-row">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col text-center pt-4">
+                        <h4>
+                            Coming Soon
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+        {% endif %}
+
+
+    </div>
+</section>
+
+
+
+{% endblock base-content %}

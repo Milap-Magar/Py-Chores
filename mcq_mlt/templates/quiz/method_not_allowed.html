@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+<style>
+    .resutl {
+        margin-top: 154px;
+    }
+
+    @media (max-width: 767px) {
+        .resutl {
+            margin-top: -54px;
+        }
+    }
+</style>
+
+{% endblock header %}
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">eMLT -- Thank you for taking the exam.</span></h1>
+                <a class="contact-btn" href="{% url 'course' %}">Return to MCQ : Level Page</a>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock base-content %}

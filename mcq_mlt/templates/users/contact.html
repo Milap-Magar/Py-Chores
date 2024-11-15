@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+<style>
+    .iframe-class{
+        /* width:80%; */
+        text-align:center;
+    }
+
+    .iframe-class iframe{
+        width:100%;
+    }
+</style>
+
+{% endblock header %}
+
+{% block startscript %}
+{% endblock startscript %}
+
+
+{% block base-content %}
+
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">CONTACT MCQMLT</span></h1>
+                <p class="subhead">eduMLT is a platform where you can prepare for Nepal's demanded courses.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-1">
+                    <div class="row contact-1-row">
+                        <div class="i">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="right-contect">
+                            Phone Number <br>
+                            +977-9801069497
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="contact-1">
+                    <div class="row contact-1-row">
+                        <div class="i">
+                            <i class="fas fa-envelope-open"></i>
+                        </div>
+                        <div class="right-contect">
+                            Email Address <br>
+                            mcqmlt@gmail.com
+                        </div>
+
+                    </div>
+                </div>
+                <div class="contact-1">
+                    <div class="row contact-1-row">
+                        <div class="i">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="right-contect">
+                            Address <br>
+                            New-Baneshwor, Kathmandu, Nepal
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="message">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>
+                                    Send Message
+                                </h4>
+
+                                <p>eduMLT is a platform where you can prepare for Nepal's demanded courses </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="container">
+                            <p class="text-center">
+                                {{ form.non_field_errors }}
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <!-- <input type="text" class="form-control" placeholder="Write Your Name"
+                                        aria-label="Name"> -->
+                                    {{ form.full_name }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- <input type="text" class="form-control" placeholder="Your Email" aria-label="Email"> -->
+                                    {{ form.email }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- <input type="text" class="form-control" placeholder="Phone Number"
+                                        aria-label="Phone Number"> -->
+                                    {{ form.phone_number }}
+                                </div>
+                                <div class="col-sm-12">
+                                    <!-- <textarea type="text" class="form-control" placeholder="Phone Number"
+                                        aria-label="Phone Number"></textarea> -->
+                                        {{ form.message }}
+                                </div>
+                                <div class="col-sm--12">
+                                    <input class="submit-contact w-100" type="submit" value="Submit">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="map">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12 text-center mt-5">
+                <h3><span class="our-team-text">FIND US ON GOOGLE MAPS</span></h3>
+                <div class="iframe-class">
+                    <iframe class="mt-4"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.0358176657064!2d85.32950351548178!3d27.685287833067036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1935b8104c99%3A0xcb9d188e3659fc8b!2sDoerssoft!5e0!3m2!1sen!2snp!4v1644926925591!5m2!1sen!2snp"
+                    style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock base-content %}
+
+{% block script %}
+<script>
+    const passwordField1 = document.querySelector("#id_full_name");
+    const passwordField2 = document.querySelector("#id_email");
+    const passwordField3 = document.querySelector("#id_phone_number");
+    const passwordField4 = document.querySelector("#id_message");
+
+    passwordField1.classList.add("form-control");
+    passwordField2.classList.add("form-control");
+    passwordField3.classList.add("form-control");
+    passwordField4.classList.add("form-control");
+
+    passwordField1.placeholder = "{{ form.full_name.label }}";
+    passwordField2.placeholder = "{{ form.email.label }}"; 
+    passwordField3.placeholder = "{{ form.phone_number.label }}"; 
+    passwordField4.placeholder = "{{ form.message.label }}"; 
+</script>
+{% endblock script %}

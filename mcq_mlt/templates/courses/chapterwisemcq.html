@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style>
+    span.my-inline p {
+        display: inline !important;
+    }
+</style>
+
+{% endblock header %}
+
+{% block startscript %}
+<script>
+    function disableBack() { window.history.forward(); }
+    setTimeout("disableBack()", 0);
+    window.onunload = function () { null };
+</script>
+
+{% endblock startscript %}
+
+
+{% block base-content %}
+<p style="margin-top:84px;">
+    <center><b>{{ chapter }} : MCQ Page</b></center>
+</p>
+
+{% if user.is_superuser %}
+<div align="center" style="margin: 0 auto;">
+    <a href="{% url 'render_pdf' modelset.id %}" class="btn btn-warning">Download Questions</a>
+</div>
+{% endif %}
+
+
+{% if question %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+
+
+            <form id="quizform" method="POST">
+                {% csrf_token %}
+                {% for q in question %}
+                <div class="form-group mb-4">
+                    <li class="list-group-item active" aria-current="true"> {{ forloop.counter }}. <span
+                            class="my-inline">{{ q.question_statement|safe }}</span>
+                </div>
+                <div class="form-check">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios1"
+                            value="option1">
+                        <label class="form-check-label" for="gridRadios1">
+                            <span class="my-inline">{{ q.choice_1|safe }}</span>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios2"
+                            value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                            <span class="my-inline">{{ q.choice_2|safe }}</span>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios3"
+                            value="option3">
+                        <label class="form-check-label" for="gridRadios1">
+                            <span class="my-inline">{{ q.choice_3|safe }}</span>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{q.question_statement}}" id="gridRadios2"
+                            value="option4">
+                        <label class="form-check-label" for="gridRadios4">
+                            <span class="my-inline">{{ q.choice_4|safe }}</span>
+                        </label>
+                    </div>
+                    <hr>
+                    <br>
+                </div>
+                {% endfor %}
+                <input id="myBtn" type="submit" class="btn btn-primary">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+
+<br>
+
+<p class="text-center" style="min-height:32vh;">Please stay tuned .. </p>
+
+
+
+{% endif %}
+
+
+{% endblock base-content %}
+
+{% block script %}
+<script>
+    document.getElementById("myBtn").addEventListener("click", function () {
+        // alert('Are you sure you want to submit the mcq.');
+        document.getElementById("myBtn").disabled = True;
+    });
+</script>
+
+
+
+
+<!-- In the above code snippet, If you want the form to submit after 15 seconds, set the time with 15000. 1s = 1000 milliseconds , 60s = 60,000 == 1minute, 1hr = 3600 s == 3,600,000   
+
+ -->
+
+<script src="">
+    function circle() {
+        body.innerHTML = '<h2> wait brother </h2>'
+    }    
+</script>
+
+{% endblock script %}

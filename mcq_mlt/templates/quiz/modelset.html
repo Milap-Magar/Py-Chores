@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block header %}
+
+{% endblock header %}
+
+
+{% block base-content %}
+
+<section id="hs_hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 left-col">
+                <h1><span class="white">MCQs - MODELSETS</span></h1>
+                <p class="subhead">MCQMLT is a platform where you can prepare for Nepal's demanded courses.</p>
+
+                <a class="contact-btn" href="{% url 'users:register' %}">GET STARTED</a>
+            </div>
+
+        </div>
+</section>
+
+<section id="category-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 level-col text-left left-col">
+                <h3><span class="level-orange-span">{{ category.category_name }} (Modelsets) </span></h3>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+
+
+        <div class="row g-4 cards-row" style="padding:0 3% 0 3%;">
+
+
+            <div class="col-12 left">
+                <div class="card modelset-active">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.category_name }}</h5>
+                        <p class="card-text">{{ category.category_description|safe }}</p>
+                        <!-- <a href="modelset.html" class="btn get-started-btn">VIEW MODELSSETS</a> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="modelset-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="title-of-modelset-only">
+                    <div class="alert alert-primary" role="alert">
+                        {{ category.category_name }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                {% if modelsets %}
+
+                {% for models in modelsets %}
+
+                <div class="alert alert-primary" role="alert">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">{{ models.modelset_title }}</div>
+                            <div class="col-md-5">
+                                <a href="{% url 'mcq' models.id %}" class="start-quiz-btn">START QUIZ</a>                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-danger" role="alert">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">No modelsets added or you are not authenticated to view them.</div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock base-content %}
